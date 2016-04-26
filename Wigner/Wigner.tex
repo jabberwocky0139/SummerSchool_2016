@@ -137,9 +137,9 @@ $s$で積分:
 \end{eqnarray}
 を用いて, 式(\ref{wigner2})の時間微分は以下のようにまとめられる:
 \begin{eqnarray}
-  i\hbar\partial_tf_W(q, p, t) &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}i\hbar\partial_t\qty(\ket{\psi(t)}\bra{\psi(t)})\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
-  \nonumber  &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}i\hbar\partial_t(\ket{\psi(t)})\bra{\psi(t)}\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
-  &&\hspace{0.5cm} + \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}\ket{\psi(t)}i\hbar\partial_t(\bra{\psi(t)})\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
+  i\hbar\partial_tf_W(q, p, t) &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}\qty(i\hbar\partial_t\ket{\psi(t)}\bra{\psi(t)})\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
+  \nonumber  &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}(i\hbar\partial_t\ket{\psi(t)})\bra{\psi(t)}\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
+  &&\hspace{0.5cm} + \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}\ket{\psi(t)}(i\hbar\partial_t\bra{\psi(t)})\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
   &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \mel**{q_1}{\comm{\hat{H}}{\ket{\psi(t)}\bra{\psi(t)}}}{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
   &=& (\hat{H}\ket{\psi(t)}\bra{\psi(t)})_W - (\ket{\psi(t)}\bra{\psi(t)}\hat{H})_W\\
   &=& H_W(q, p)e^{\frac{i\hbar}{2}\Lambda}f_W(q, p, t) - f_W(q, p, t)e^{\frac{i\hbar}{2}\Lambda}H_W(q, p)\label{wigner-moyal}
@@ -161,14 +161,13 @@ $s$で積分:
 \end{eqnarray}
 これを計算する. 面倒なので以下では$m = \omega = \hbar = 1$の単位系を採用.  
 \begin{eqnarray}
-  \partial f_W(q, p, t) = \qty(q\partial_p - p\partial_q)f_W(q, p, t)
+  \partial_t f_W(q, p, t) = \qty(q\partial_p - p\partial_q)f_W(q, p, t)
 \end{eqnarray}
 のような偏微分方程式が導出される. これを数値的に解きたい.
 \subsection{数値計算}
 \subsubsection{差分化}
 今回は簡単のため, 普通に差分化する. 差分化した方程式はMoyal方程式は
 \begin{eqnarray}
-  %\nonumber  f(t_{n+1}) = \qty(k_1q_l + k_2)f(p_{m+1}) - \qty(k_1p_m + k_2)f(q_{l+1}) + k_2\qty(f(p_{m-1}) - f(q_{l-1})) + \qty(-k_1q_l + k_1p_m + 1)f\\
   f(t_{n+1}) = k_1\qty[q_lf(p_{m+1}) - p_mf(q_{l+1})] + \qty[k_1(-q_l + p_m) + 1]f
 \end{eqnarray}
 となる. ここでいくつかの記号の省略ルールを示す:
@@ -176,7 +175,7 @@ $s$で積分:
 \item Wigner表示の添字$W$は省略
 \item $f(q_l, p_m, t_n)$のように差分化しており, $q, p$の幅は$h_{qp}$, $t$の幅は$h_t$.
 \item $f(q_l, p_m, t_n) \rightarrow f$, $f(q_{l+1}, p_m, t_n) \rightarrow f(q_{l+1})$などの表記を用いている.
-  \item $h_t/h_{qp} = k_1$, $h_t/4h_{qp}^2 = k_2$.
+  \item $h_t/h_{qp} = k_1$.
 \end{itemize}
 これで数値計算が可能な形になった.
 \subsubsection{初期条件}

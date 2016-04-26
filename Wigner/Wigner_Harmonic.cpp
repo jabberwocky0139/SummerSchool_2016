@@ -7,11 +7,11 @@ using namespace std;
 // tの最大インデックス
 const int n = 100;
   // q, pの最大インデックス
-const int l = 1000, m = 600;
+const int l = 400, m = 400;
 // tの差分化サイズ
-const double ht = 0.1;
+const double ht = 0.01;
 // 位相空間の差分化サイズ
-const double hqp = 0.01;
+const double hqp = 0.25;
 // 置き換えパラメータ
 const double k1 = ht/hqp;
 // 系のサイズ
@@ -22,7 +22,6 @@ public:
   variable();
   ~variable();
   // Wigner関数f[q][p]
-  //double f[l][m];
   double** f;
   double** f_tmp;
 };
@@ -37,9 +36,9 @@ variable::variable(){
   }
   for(int i = 0; i < l; i++){
     for(int j = 0; j < m; j++){
-      double q = -L/2 + i*hqp;
-      double p = -L/2 + j*hqp;
-      f[i][j] = 1.0/M_PI*exp(-(q+1)*(q+1) - 0.5*p*p);
+      double q = -L/2.0 + i*hqp;
+      double p = -L/2.0 + j*hqp;
+      f[i][j] = 1.0/M_PI*exp(-(q+2)*(q+2) -p*p);
       f_tmp[i][j] = 0;
     }
   }
@@ -54,15 +53,15 @@ variable::~variable(){
   delete[] f_tmp;
 }
 
-void TimeEvolution(variable& v){
-  double f_tmp[l][m] = {0};
-  
-  // 時間発展の結果をf_tmpに代入  
-  for(int i = 1; i < l-1; i++){
-    for(int j = 1; j < m-1; j++){
+void TimeEvolution(variable& v){  
+  // 時間発展の結果をf_tmpに代入
+  for(int i = 2; i < l-2; i++){
+    for(int j = 2; j < m-2; j++){
       double q = -L/2.0 + i*hqp;
       double p = -L/2.0 + j*hqp;
-      v.f_tmp[i][j] = k1*(q*v.f[i][j+1] - p*v.f[i+1][j]) + (k1*(-q + p) + 1)*v.f[i][j];
+      // k1 = 0.04
+      //v.f_tmp[i][j] = v.f[i][j] + k1*(q*v.f[i][j+1] - p*v.f[i+1][j]) + k1*(-q + p)*v.f[i][j];
+      v.f_tmp[i][j] = v.f[i][j]+ k1/12.0*hqp*hqp*(-p*(v.f[i-2][j] - 8*v.f[i-1][j] + 8*v.f[i+1][j] - v.f[i+2][j]) + q*(v.f[i][j-2] - 8*v.f[i][j-1] + 8*v.f[i][j+1] - v.f[i][j+2]));
     }
   }
   // t_tmpをv.fにコピー
@@ -71,6 +70,7 @@ void TimeEvolution(variable& v){
       v.f[i][j] = v.f_tmp[i][j];
     }
   }
+  
 }
 
 void SetPlot(variable& v, ofstream& fout, bool flag){
@@ -86,45 +86,18 @@ void SetPlot(variable& v, ofstream& fout, bool flag){
 }
 
 int main(void){
-  /*
+  
   variable v;
   ofstream fout("output.txt");
   
   fout << "#q" << "\t" << "p" << "\t" << "value" << endl;
-  bool flag = true;
-  for(int i = 0; i < 30; i++){
-    //if(i > 30) flag = true;
+  bool flag = false;
+  for(int i = 0; i < 3000; i++){
+    if(i%100 == 0) flag = true;
     SetPlot(v, fout, flag);
     cout << i << endl;
+    flag = false;
   }
-  */
-
   
-  /*以下テストプログラム*/
-
-  double f[l];
-  double f_tmp[l] = {0};
-  ofstream fout("output_test.txt");
-  // 初期関数
-  for(int i = 0; i < l; i++){
-    double q = -L/2.0 + i*hqp;
-    f[i] = exp(-(q-1)*(q-1));
-    fout << q << "\t" << f[i] << endl;
-  }
-  fout << endl;
-
-  // 時間発展
-  for(int j = 0; j < 60; j++){
-    for(int i = 1; i < l-1; i++){
-      double q = -L/2.0 + i*hqp;
-      double k = ht/(hqp*hqp);
-      f_tmp[i] = -k/2.0*(f[i+1] + f[i-1]) + (ht/2.0*q*q + k + 1)*f[i];
-      fout << q << "\t" << f_tmp[i] << endl;
-    }
-    fout << endl;
-    for(int i = 0; i < l; i++){
-      f[i] = f_tmp[i];
-    }
-  }
   return 0;
 }
