@@ -7,9 +7,9 @@ using namespace std;
 // tの最大インデックス
 const int n = 100;
   // q, pの最大インデックス
-const int l = 400, m = 400;
+const int l = 200, m = 200;
 // tの差分化サイズ
-const double ht = 0.01;
+const double ht = 0.001;
 // 位相空間の差分化サイズ
 const double hqp = 0.25;
 // 置き換えパラメータ
@@ -60,8 +60,8 @@ void TimeEvolution(variable& v){
       double q = -L/2.0 + i*hqp;
       double p = -L/2.0 + j*hqp;
       // k1 = 0.04
-      //v.f_tmp[i][j] = v.f[i][j] + k1*(q*v.f[i][j+1] - p*v.f[i+1][j]) + k1*(-q + p)*v.f[i][j];
-      v.f_tmp[i][j] = v.f[i][j]+ k1/12.0*hqp*hqp*(-p*(v.f[i-2][j] - 8*v.f[i-1][j] + 8*v.f[i+1][j] - v.f[i+2][j]) + q*(v.f[i][j-2] - 8*v.f[i][j-1] + 8*v.f[i][j+1] - v.f[i][j+2]));
+      //v.f_tmp[i][j] = v.f[i][j] + k1*hqp*(q*v.f[i][j+1] - p*v.f[i+1][j]) + k1*hqp*(-q + p)*v.f[i][j];
+      v.f_tmp[i][j] = v.f[i][j] + k1*hqp*(-p*(v.f[i-2][j] - 8*v.f[i-1][j] + 8*v.f[i+1][j] - v.f[i+2][j]) + q*(v.f[i][j-2] - 8*v.f[i][j-1] + 8*v.f[i][j+1] - v.f[i][j+2]));
     }
   }
   // t_tmpをv.fにコピー
@@ -92,7 +92,7 @@ int main(void){
   
   fout << "#q" << "\t" << "p" << "\t" << "value" << endl;
   bool flag = false;
-  for(int i = 0; i < 3000; i++){
+  for(int i = 0; i < 5000; i++){
     if(i%100 == 0) flag = true;
     SetPlot(v, fout, flag);
     cout << i << endl;
