@@ -87,7 +87,7 @@ $f_W(q, p, t)$の時間発展方程式を導く. その準備として２つの�
 今回は式(\ref{wigner1})の流儀を採用する:
 \begin{eqnarray}
   (\hat{A}\hat{B})_W &=& \int_{-\infty}^{\infty}ds \bra{q-\frac{s}{2}}\hat{A}\hat{B}\ket{q+\frac{s}{2}}e^{ips/\hbar}
-  = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}ds dq' \mel**{q-\frac{s}{2}}{\hat{A}}{q'}\mel**{q'}{\hat{B}}{q+\frac{s}{2}}e^{ips/\hbar}
+  = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}ds dq' \mel**{q-\frac{s}{2}}{\hat{A}}{q'}\mel**{q'}{\hat{B}}{q+\frac{s}{2}}e^{ips/\hbar}\label{wigner_start}
 \end{eqnarray}
 ここで式(\ref{wigner_formula})を用いて変形する:
 \begin{eqnarray}
@@ -103,7 +103,7 @@ expの肩の変数に着目して$A_W, B_W$の変数を変形する:
   \nonumber\frac{1}{(2\pi\hbar)^2}\int ds dq' dp' dp'' &&e^{ips/\hbar}e^{-ip'\qty(q-q'-\frac{s}{2})/\hbar}e^{-ip''\qty(q'-q-\frac{s}{2})/\hbar}\\
   &&\times\qty(e^{\frac{1}{2}\pqty{q'-q-\frac{s}{2}}\partial_q}A_W\qty(q, p'))\qty(e^{-\frac{1}{2}\pqty{q-q'-\frac{s}{2}}\partial_q}B_W\qty(q, p''))
 \end{eqnarray}
-と変形. さらに並進変換$e^{a\partial_q}e^{pq} = e^{(p+a)q}$を用いて
+と変形. さらに並進変換$e^{a\partial_q}e^{pq} = e^{p(q+a)}$を用いて
 \begin{eqnarray}
   \nonumber\frac{1}{(2\pi\hbar)^2}\int&& ds dq' dp' dp'' e^{ips/\hbar}\\
   &&\times\qty(A_W\qty(q, p')e^{\frac{i\hbar}{2}\overleftarrow{\partial}_q\overrightarrow{\partial}_{p''}}e^{-ip''\qty(q'-q-\frac{s}{2})/\hbar})\qty(e^{-ip'\qty(q-q'-\frac{s}{2})/\hbar}e^{-\frac{i\hbar}{2}\overleftarrow{\partial}_{p'}\overrightarrow{\partial}_{q}}B_W\qty(q, p''))
@@ -128,7 +128,7 @@ $s$で積分:
 \end{eqnarray}
 つまり, $e^{\frac{i\hbar}{2}\qty(\overleftarrow{\partial}_q\overrightarrow{\partial}_{p}-\overleftarrow{\partial}_{p}\overrightarrow{\partial}_{q})} = e^{\frac{i\hbar}{2}\Lambda}$とおくと,
 \begin{eqnarray}
-  (\hat{A}\hat{B})_W = A_W(q, p)e^{\frac{i\hbar}{2}\Lambda}B_W(q, p)
+  (\hat{A}\hat{B})_W = A_W(q, p)e^{\frac{i\hbar}{2}\Lambda}B_W(q, p)\label{wigner_end}
 \end{eqnarray}
 \subsection{$f_W(q, p, t)$の時間発展}
 以上の結果を基に$f_W(q, p, t)$の時間発展方程式を導く. Schr\"odinger方程式
@@ -161,7 +161,7 @@ $s$で積分:
 \end{eqnarray}
 これを計算する. 面倒なので以下では$m = \omega = \hbar = 1$の単位系を採用.  
 \begin{eqnarray}
-  \partial_t f_W(q, p, t) = \qty(q\partial_p - p\partial_q)f_W(q, p, t)
+  \partial_t f_W(q, p, t) = \qty(q\partial_p - p\partial_q)f_W(q, p, t)\label{wigner-moyal2}
 \end{eqnarray}
 のような偏微分方程式が導出される. これを数値的に解きたい.
 \subsection{数値計算}
@@ -178,22 +178,94 @@ $s$で積分:
   \item $h_t/h_{qp} = k_1$.
 \end{itemize}
 これで数値計算が可能な形になった.
+\subsubsection{問題点}
+上の差分化は単なる前進差分なので${\cal O}(h_{qp}), {\cal O}(h_{t})$の誤差を生じる. これで計算すると, よほど細かく差分化しないとヤバいです. 誤差が累積して襲ってきます. せめて中央差分にしましょう. 
 \subsubsection{初期条件}
-初期関数として
+%% 初期関数として
+%% \begin{eqnarray}
+%%   f_0 = \sqrt{\frac{5}{\pi}}e^{5(q+\frac{1}{2})^2}
+%% \end{eqnarray}
+%% を用意する(やる気なさ過ぎ？).
+あるガウス波束$f_0$のWigner表示として
 \begin{eqnarray}
-  f_0 = \sqrt{\frac{5}{\pi}}e^{5(q+\frac{1}{2})^2}
+  f_{0W} = \frac{1}{\pi}e^{-(q+4)^2 -p^2}\label{harmonic_wigner}
 \end{eqnarray}
-を用意する(やる気なさ過ぎ？). $f_0$のWigner表示は
-\begin{eqnarray}
-  f_{0W} = \sqrt{\frac{2}{5\pi}}e^{-10(q^2 + q + \frac{p^2}{16} - \frac{1}{4})}
-\end{eqnarray}
-である.
+を用意する.$f_0$はこんなかんじ:
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width = 8cm]{./fig1.eps}
+  \includegraphics[width = 7cm]{./fig1.eps}
   \label{fig1}
 \end{figure}
 \\
-この波束が調和型トラップによって振動するイメージ. もちろん, 相空間上では$p$方向の広がりもある. 
+\newpage
+この波束が調和型トラップによって振動する. 古典粒子が調和振動子トラップ内で振動するとき, 位相空間上の点は楕円を描くように動くはずでありWigner関数も同様の動きをするが, 相空間上では$q, p$方向の広がりがある. 
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width = 12cm]{./fig2.eps}
+  \end{center}
+  \label{fig2}
+\end{figure}\\
+こんなほんやりした玉みたいなのが位相空間上をぐるぐる回るはず. 
+\section{課題}
+やってほしいこと・理解してほしいこと. 
+\subsection{Wigner関数の性質}
+Wigner分布関数は位相空間上の確率分布と見なすことができる. その理由として,
+\begin{eqnarray}
+  \int_{-\infty}^{\infty}dp f_W(q, p) &=& \qty|\psi(q)|^2\\
+  \int_{-\infty}^{\infty}dq f_W(q, p) &=& \qty|\tilde{\psi}(p)|^2\\
+  \int_{-\infty}^{\infty}dqdp f_W(q, p) &=& 1
+\end{eqnarray}
+という性質が挙げられる.
+
+\fbox{問1} 上式を証明せよ. また, 確率分布として理解できる理由を説明せよ.\\
+
+\fbox{問2} (\ref{harmonic_wigner})の$f_{0W}$について, Wigner表示する前の$f_0$を求めよ. 
+\subsection{Wigner-Moyal方程式の導出}
+\fbox{補題1} 離散基底の直交性
+\begin{eqnarray}
+  \sum_j \bra{q_i}\ket{q_j} = \delta_{ij}
+\end{eqnarray}
+を連続に拡張せよ.
+
+\fbox{補題2} Taylor展開を用いて
+\begin{eqnarray}
+  e^{a\partial_q}f(q) = f(q+a)
+\end{eqnarray}
+を証明せよ.
+
+\fbox{補題3} 1のフーエリエ変換がデルタ関数になること
+\begin{eqnarray}
+  \delta(x) = \frac{1}{2\pi}\int dk e^{-ikx}
+\end{eqnarray}
+を証明せよ.
+
+\fbox{問3} (\ref{wigner_start})-(\ref{wigner_end})の計算を追え.\\
+
+\fbox{問4} (\ref{wigner_end})がPoisson括弧式になっていることを示せ. 
+
+\subsection{数値解析}
+\fbox{問5} $t, q, p$について(\ref{wigner-moyal2})を中央差分で差分化せよ.\\
+
+\fbox{問6} コーディングして位相空間上のWigner関数の時間発展を数値計算し, Gnuplotで可視化せよ. 言語は任意. 
+
+\subsection{発展課題}
+まずやってほしいことは, 以上の内容について物理的な理由付けをして理解することです. とりあえず数値計算してなんか出てきました, ってのはナシにしてください. それができたら今までの知識を用いて好きなことをやってください. 自由研究です.
+
+とはいえ丸投げも厳しいと思うのでいくつかのテーマを挙げます. \\
+
+\fbox{1} Wigner表示を用いると様々な量子力学的な現象を半古典的な描像で記述できる. 例えば
+\begin{itemize}
+\item ポテンシャル障壁を透過する波束
+\item $q^3$ポテンシャル等における粒子の散逸
+\end{itemize}
+
+\fbox{2} 位相空間ではなくて$q$空間における動きをSchr\"odinger方程式をを数値計算することで追う.\\
+
+\fbox{3} 差分法はダサいのでSymplectic法で攻める.\\
+
+\fbox{4} むしろ調和振動子くらいならWigner関数の時間発展も解析的に追えるんじゃね？\\
+
+などなど...お好きにどうぞ. 
+
 \end{document}
 

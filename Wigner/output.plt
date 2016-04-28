@@ -13,8 +13,8 @@ set cbr[0:0.35]
 
 #(a)の場合
 set size square
-do for[i=0:49]{
-	set title sprintf("phase space with wigner : time = %d", i)
+do for[i=0:99]{
+	set title sprintf("phase space on wigner : time = %d", i)
 	plot "output.txt" every :::i::i using 1:2:3 with image notitle
 	pause 0.01
 }
