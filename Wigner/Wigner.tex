@@ -225,28 +225,26 @@ Wigner分布関数は位相空間上の確率分布と見なすことができ�
 \begin{eqnarray}
   \sum_j \bra{q_i}\ket{q_j} = \delta_{ij}
 \end{eqnarray}
-を連続に拡張せよ.
+を連続に拡張せよ.\\
 
 \fbox{補題2} Taylor展開を用いて
 \begin{eqnarray}
   e^{a\partial_q}f(q) = f(q+a)
 \end{eqnarray}
-を証明せよ.
+を証明せよ.\\
 
 \fbox{補題3} 1のフーエリエ変換がデルタ関数になること
 \begin{eqnarray}
   \delta(x) = \frac{1}{2\pi}\int dk e^{-ikx}
 \end{eqnarray}
-を証明せよ.
+を証明せよ.\\
 
 \fbox{問3} (\ref{wigner_start})-(\ref{wigner_end})の計算を追え.\\
 
-\fbox{問4} (\ref{wigner_end})がPoisson括弧式になっていることを示せ. 
-
 \subsection{数値解析}
-\fbox{問5} $t, q, p$について(\ref{wigner-moyal2})を中央差分で差分化せよ.\\
+\fbox{問4} $t, q, p$について(\ref{wigner-moyal2})を中央差分で差分化せよ.\\
 
-\fbox{問6} コーディングして位相空間上のWigner関数の時間発展を数値計算し, Gnuplotで可視化せよ. 言語は任意. 
+\fbox{問5} 位相空間上のWigner関数の時間発展を数値計算し, Gnuplotで可視化せよ. 
 
 \subsection{発展課題}
 まずやってほしいことは, 以上の内容について物理的な理由付けをして理解することです. とりあえず数値計算してなんか出てきました, ってのはナシにしてください. それができたら今までの知識を用いて好きなことをやってください. 自由研究です.
@@ -259,11 +257,17 @@ Wigner分布関数は位相空間上の確率分布と見なすことができ�
 \item $q^3$ポテンシャル等における粒子の散逸
 \end{itemize}
 
-\fbox{2} 位相空間ではなくて$q$空間における動きをSchr\"odinger方程式をを数値計算することで追う.\\
+\fbox{2} 位相空間ではなくて$q$空間における動きを追う(Schr\"odinger方程式を数値計算する).\\
 
 \fbox{3} 差分法はダサいのでSymplectic法で攻める.\\
 
 \fbox{4} むしろ調和振動子くらいならWigner関数の時間発展も解析的に追えるんじゃね？\\
+
+\fbox{5} コヒーレント状態・コヒーレント変換に関する考察. \\
+
+\fbox{6} Wigner関数の負の値に関する考察.\\
+
+\fbox{7} 伏見関数でやってみる. \\
 
 などなど...お好きにどうぞ. 
 

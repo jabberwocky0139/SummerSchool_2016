@@ -11,7 +11,7 @@ const int l = 200, m = 200;
 // tの差分化サイズ
 const double ht = 0.002;
 // 位相空間の差分化サイズ
-const double hqp = 0.25;
+const double hqp = 0.1;
 // 置き換えパラメータ
 const double k1 = ht/hqp;
 // 系のサイズ

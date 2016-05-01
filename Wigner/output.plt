@@ -1,5 +1,4 @@
 reset
-set terminal x11
 set palette model RGB rgb 30,31,32
 set pm3d map
 set xl "q"
@@ -9,7 +8,7 @@ set yl "p"
 set xr [-10:10]
 set yr [-10:10]
 #set zr[0:60];
-set cbr[0:0.35]
+set cbr[-0.05:0.4]
 
 #(a)の場合
 set size square
