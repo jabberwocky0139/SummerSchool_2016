@@ -69,14 +69,12 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
-INPUT /usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3unicode-data.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3unicode-data.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3dvips.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3dvips.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/wick/wick.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/wick/wick.sty
+INPUT /usr/share/texmf/tex/latex/wick/wick.sty
+INPUT /usr/share/texmf/tex/latex/wick/wick.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
@@ -174,4 +172,6 @@ INPUT ./specificheat.eps
 INPUT ./specificheat.eps
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+INPUT ./Dai.eps
+INPUT ./Dai.eps
 INPUT MonteCarlo.aux

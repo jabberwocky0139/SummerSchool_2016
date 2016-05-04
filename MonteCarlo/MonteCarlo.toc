@@ -12,4 +12,7 @@
 \contentsline {subsection}{\numberline {4.2}Metropolis法}{4}
 \contentsline {subsection}{\numberline {4.3}2次元Ising模型}{5}
 \contentsline {subsection}{\numberline {4.4}数値計算上の注意}{6}
+\contentsline {subsubsection}{\numberline {4.4.1}乱数}{6}
+\contentsline {subsubsection}{\numberline {4.4.2}アンサンブル平均}{6}
+\contentsline {subsubsection}{\numberline {4.4.3}ローカルな極小点}{6}
 \contentsline {section}{\numberline {5}課題}{6}

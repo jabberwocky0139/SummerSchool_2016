@@ -11,19 +11,18 @@ set cbr[-1:1]
 
 #(a)の場合
 set multiplot layout 1,4
-
 set size square
-set title "Ising model : Initial state"
-plot "output_ising2_1e-0.txt" every :::0::0 using 1:2:3 with image notitle
+set title "Ising model : Initial D"
+plot "output_ising2D.txt" every :::0::0 using 1:2:3 with image notitle
 set size square
-set title "Ising model : T=3"
-plot "output_ising2_3e-0.txt" every :::1::1 using 1:2:3 with image notitle
+set title "Ising model : Dai T = 1"
+plot "output_ising2D.txt" every :::3::3 using 1:2:3 with image notitle
 set size square
-set title "Ising model : T=2"
-plot "output_ising2_2e-0.txt" every :::1::1 using 1:2:3 with image notitle
+set title "Ising model : Dai T = 2.3"
+plot "output_ising2D.txt" every :::2::2 using 1:2:3 with image notitle
 set size square
-set title "Ising model : T=1"
-plot "output_ising2_1e-0.txt" every :::1::1 using 1:2:3 with image notitle
+set title "Ising model : Dai T = 3"
+plot "output_ising2D.txt" every :::1::1 using 1:2:3 with image notitle
 
 unset multiplot
 reset

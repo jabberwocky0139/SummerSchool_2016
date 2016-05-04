@@ -9,7 +9,7 @@ extern "C"{
 using namespace std;
 
 // 系のサイズ
-const int N = 16;
+const int N = 64;
 
 // 乱数の用意
 random_device rd;
@@ -41,7 +41,7 @@ public:
 Spin::Spin(){
 
   // 系の温度の初期設定
-  T = 0.0001;
+  T = 1.5;
   
   // スピンを動的確保
   angle = new double*[N];
@@ -102,7 +102,7 @@ inline void MonteCarlo(Spin& s){
   double EnergyBefore = -J*s.SetSpin(siteX, siteY)*(s.SetSpin(siteX, siteY-1) + s.SetSpin(siteX, siteY+1) + s.SetSpin(siteX-1, siteY) + s.SetSpin(siteX+1, siteY));
   //EnergyBefore += -H*s.SetSpin(siteX, siteY);
   double EnergyAfter = -EnergyBefore;
-  if(EnergyBefore > EnergyAfter){
+  if(EnergyBefore >= EnergyAfter){
     // 反転したほうがエネルギーが小さく系が安定. スピン反転
     s.angle[siteX][siteY] = -s.angle[siteX][siteY];
   }else{
@@ -168,31 +168,31 @@ inline void Output_MC(ofstream& fout_MC, Spin& s){
 int main(void){
   
   ofstream fout("output_ising2_3e-0.txt");
-  ofstream fout_MC("output_ising2_MC3.txt");
+  ofstream fout_MC("output_ising2_MC5.txt");
 
   // 磁化・比熱の出力
   fout_MC << "#T" << "\t" << "E" << "\t" <<  "M" << endl;
-  int Nequ = 50;
-  Spin s[50];
-  for(int i = 0; i < 50; i++){
-    for(int j = 0; j < Nequ; j++) s[j].T = i*0.1 + 0.0001;
+  int Nequ = 150;
+  Spin s[150];
+  for(int i = 0; i < 35; i++){
+    for(int j = 0; j < Nequ; j++) s[j].T = i*0.025 + 2;
     cout << "-*- T = " << s[0].T << " -*-" << endl;
     double mag = 0, E = 0;
 
-    for(int j = 0; j <= 1e7; j++){
+    for(int j = 0; j <= N*N*50; j++){
       for(int k = 0; k < Nequ; k++){
 	MonteCarlo(s[k]);
       }
       if(j%10000 == 0) cout << j/10000 << "-";
       fflush(stdout);
     }
-    for(int k = 0; k < 1000; k++){
+    for(int k = 0; k < 2000; k++){
       for(int j = 0; j < Nequ; j++){
 	MonteCarlo(s[j]);
 	SetMag(s[j]);
 	SetEnergy(s[j]);
-	mag += s[j].M/Nequ/1000;
-	E += s[j].Energy/Nequ/1000;
+	mag += s[j].M/Nequ/2000;
+	E += s[j].Energy/Nequ/2000;
       }
     }
     
