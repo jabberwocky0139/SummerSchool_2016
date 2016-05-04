@@ -98,12 +98,12 @@ expの肩の変数に着目して$A_W, B_W$の変数を変形する:
   \nonumber\frac{1}{(2\pi\hbar)^2}\int ds dq' dp' dp'' &&e^{ips/\hbar}e^{-ip'\qty(q-q'-\frac{s}{2})/\hbar} e^{-ip''\qty(q'-q-\frac{s}{2})/\hbar}\\
  && \times A_W\qty(q + \frac{1}{2}\pqty{q'-q-\frac{s}{2}}, p')B_W\qty(q - \frac{1}{2}\pqty{q-q'-\frac{s}{2}}, p'')
 \end{eqnarray}
-これを並進演算子を用いて
+これを並進変換$e^{a\partial_q}e^{pq} = e^{p(q+a)}$より
 \begin{eqnarray}
   \nonumber\frac{1}{(2\pi\hbar)^2}\int ds dq' dp' dp'' &&e^{ips/\hbar}e^{-ip'\qty(q-q'-\frac{s}{2})/\hbar}e^{-ip''\qty(q'-q-\frac{s}{2})/\hbar}\\
   &&\times\qty(e^{\frac{1}{2}\pqty{q'-q-\frac{s}{2}}\partial_q}A_W\qty(q, p'))\qty(e^{-\frac{1}{2}\pqty{q-q'-\frac{s}{2}}\partial_q}B_W\qty(q, p''))
 \end{eqnarray}
-と変形. さらに並進変換$e^{a\partial_q}e^{pq} = e^{p(q+a)}$を用いて
+と変形. さらに同様に並進変換を用いて
 \begin{eqnarray}
   \nonumber\frac{1}{(2\pi\hbar)^2}\int&& ds dq' dp' dp'' e^{ips/\hbar}\\
   &&\times\qty(A_W\qty(q, p')e^{\frac{i\hbar}{2}\overleftarrow{\partial}_q\overrightarrow{\partial}_{p''}}e^{-ip''\qty(q'-q-\frac{s}{2})/\hbar})\qty(e^{-ip'\qty(q-q'-\frac{s}{2})/\hbar}e^{-\frac{i\hbar}{2}\overleftarrow{\partial}_{p'}\overrightarrow{\partial}_{q}}B_W\qty(q, p''))
@@ -122,11 +122,11 @@ $s$で積分:
 \begin{eqnarray}
   \int dp' \qty(A_W\qty(q, p')e^{\frac{i\hbar}{2}\overleftarrow{\partial}_q\overrightarrow{\partial}_{p'}}\delta(p-p')e^{-\frac{i\hbar}{2}\overleftarrow{\partial}_{p'}\overrightarrow{\partial}_{q}}B_W\qty(q, p'))
 \end{eqnarray}
-最後に$p'$で積分:
+$p'$で積分:
 \begin{eqnarray}
   \qty(A_W\qty(q, p)e^{\frac{i\hbar}{2}\overleftarrow{\partial}_q\overrightarrow{\partial}_{p}}e^{-\frac{i\hbar}{2}\overleftarrow{\partial}_{p}\overrightarrow{\partial}_{q}}B_W\qty(q, p))
 \end{eqnarray}
-つまり, $e^{\frac{i\hbar}{2}\qty(\overleftarrow{\partial}_q\overrightarrow{\partial}_{p}-\overleftarrow{\partial}_{p}\overrightarrow{\partial}_{q})} = e^{\frac{i\hbar}{2}\Lambda}$とおくと,
+$e^{\frac{i\hbar}{2}\qty(\overleftarrow{\partial}_q\overrightarrow{\partial}_{p}-\overleftarrow{\partial}_{p}\overrightarrow{\partial}_{q})} = e^{\frac{i\hbar}{2}\Lambda}$とおくと,
 \begin{eqnarray}
   (\hat{A}\hat{B})_W = A_W(q, p)e^{\frac{i\hbar}{2}\Lambda}B_W(q, p)\label{wigner_end}
 \end{eqnarray}
@@ -142,8 +142,10 @@ $s$で積分:
   &&\hspace{0.5cm} + \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}\ket{\psi(t)}(i\hbar\partial_t\bra{\psi(t)})\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
   &=& \int_{-\infty}^{\infty} d\overline{q}_{12} \mel**{q_1}{\comm{\hat{H}}{\ket{\psi(t)}\bra{\psi(t)}}}{q_2}e^{-ip\overline{q}_{12}/\hbar}\\
   &=& (\hat{H}\ket{\psi(t)}\bra{\psi(t)})_W - (\ket{\psi(t)}\bra{\psi(t)}\hat{H})_W\\
-  &=& H_W(q, p)e^{\frac{i\hbar}{2}\Lambda}f_W(q, p, t) - f_W(q, p, t)e^{\frac{i\hbar}{2}\Lambda}H_W(q, p)\label{wigner-moyal}
+  &=& H_W(q, p)e^{\frac{i\hbar}{2}\Lambda}f_W(q, p, t) - f_W(q, p, t)e^{\frac{i\hbar}{2}\Lambda}H_W(q, p)\label{wigner-moyal}\\
+  &=& \{\{H_W, f_W\}\}
 \end{eqnarray}
+これをMoyal括弧とか一般化Poisson括弧とか呼んだりする.
 \section{具体的な問題}
 以上の定式化を具体的なモデルに落とし込み, 数値計算で相空間上の運動を見る.
 \subsection{調和振動子系のWigner-Moyal方程式}
@@ -255,6 +257,7 @@ Wigner分布関数は位相空間上の確率分布と見なすことができ�
 \begin{itemize}
 \item ポテンシャル障壁を透過する波束
 \item $q^3$ポテンシャル等における粒子の散逸
+\item $\Delta q\cdot\Delta p\geq \hbar$の確認
 \end{itemize}
 
 \fbox{2} 位相空間ではなくて$q$空間における動きを追う(Schr\"odinger方程式を数値計算する).\\
