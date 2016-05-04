@@ -1,0 +1,234 @@
+\documentclass[10.5pt,a4paper]{jsarticle}
+%\documentclass[10.5pt,a4paper]{jreport}
+
+\usepackage{amsmath,amssymb}
+\usepackage{comment}
+\usepackage{bm}
+\usepackage[dvips]{graphicx}
+\usepackage{ascmac}
+\usepackage{color}
+\usepackage{braket}
+\usepackage{bigints}
+\usepackage{cite}
+\usepackage{physics}
+\usepackage{wick}
+\usepackage{geometry}
+\geometry{left=20mm,right=20mm,top=25mm,bottom=25mm}
+
+\newcommand{\Lk}{{\cal L}_k}
+\newcommand{\La}{{\cal L}_a}
+\newcommand{\M}{{\cal M}}
+\newcommand{\dket}[1]{| #1 \rangle \! \rangle}
+\newcommand{\dbra}[1]{\langle \! \langle #1 |}
+\newcommand{\dbraket}[2]{\langle \! \langle #1 | #2 \rangle \! \rangle}
+\newcommand{\dpbra}[1]{( \! ( #1 |}
+\newcommand{\dpket}[1]{| #1 ) \! )}
+\newcommand{\pbra}[1]{( #1 |}
+\newcommand{\pket}[1]{| #1 )}
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}} % 表
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\calM}{{\cal M}}
+\newcommand{\calL}{{\cal L}}
+\newcommand{\calI}{{\cal I}}
+\newcommand{\calK}{{\cal K}}
+\newcommand{\calQ}{{\cal Q}}
+\newcommand{\calP}{{\cal P}}
+\newcommand{\calG}{{\cal G}}
+\newcommand{\calS}{{\cal S}}
+%\newcommand{\Tr}{{\rm Tr}}
+
+%-------------------式番号にSectionを付加------------------------------
+\def\theequation{\thesection.\arabic{equation}}
+\makeatletter
+\@addtoreset{equation}{chapter}
+\makeatother
+%-----------------------------------------------------------------------
+
+%----------------タイトル-----------------------------------------
+\title{
+  \Huge 経路積分であそぼう\\
+  \Large 鳥居 優作
+}
+\begin{document}
+\maketitle
+%\setcounter{page}{0}
+\thispagestyle{empty}
+\tableofcontents
+\section{はじめに}
+経路積分の方法について「経路」の意味を数式だけでなく具体的なイメージを持って理解することが目的. 抽象的な解析計算が少し多い上に, 量子力学の基礎が身についていないと何をやっているのかがわかりづらいかもしれません. がんばりましょう. 親切でない記述も多いと思います. わからないところは遠慮なく訊いてください.
+
+また随所に問題を設けていますが, これは計算を追うためのヒントだと考えてください. 問題がないところでも必ず自分の手で計算を追うようにしてください. 間違った記述・誤植があるかもしれないので批判的に読むようにしてください. 
+\section{量子力学の復習}
+\subsection{自由粒子}
+自由粒子を記述するSchr\"odinger方程式は
+\begin{eqnarray}
+  i\partial_t\ket{\psi(t)} = \frac{\hat{p}^2}{2m}\ket{\psi(t)}
+\end{eqnarray}
+これを$p$-表示に移すと簡単に解ける:
+\begin{eqnarray}
+  i\partial_t\bra{p}\ket{\psi(t)} &=& \bra{p}\frac{\hat{p}^2}{2m}\ket{\psi(t)} = \frac{p^2}{2m}\bra{p}\ket{\psi(t)}\\
+  \therefore \bra{p}\ket{\psi(t)} &=& Ce^{-i\frac{\hat{p}^2}{2m}t}
+\end{eqnarray}
+これを運動量固有値$p$でパラメトライズされたケットで表現すると
+\begin{eqnarray}
+  \ket{p, t}_S = \ket{p}e^{-i\frac{\hat{p}^2}{2m}t}
+\end{eqnarray}
+ということ.もちろん$_S\bra{p', t}\ket{p, t}_S = \delta(p-p')$. 一般解はこの線型結合で書ける:
+\begin{eqnarray}
+  \ket{\Psi, t} = \int dp f(p)\ket{p}e^{-i\frac{\hat{p}^2}{2m}t}
+\end{eqnarray}
+これは規格化条件$\bra{\Psi, t}\ket{\Psi, t} = 1$を満たしているものとする. ここで, $t = 0$で$x = 0$に局在している波束を用意する:
+\begin{eqnarray}
+  \bra{x}\ket{\psi} = \frac{1}{(\pi\alpha)^{\frac{1}{4}}}e^{-\frac{1}{2\alpha}x^2}\label{FreeWavePacket}
+\end{eqnarray}
+これの$p$-表示は完全系を挿入することで求まる:
+\begin{eqnarray}
+  \bra{p}\ket{\psi} = \int dx\ul{\bra{p}\ket{x}}\bra{x}\ket{\psi} = \qty(\frac{\alpha}{\pi})^{\frac{1}{4}}e^{-\frac{\alpha}{2}p^2}
+\end{eqnarray}
+\\
+
+\fbox{問1} $\bra{x}\ket{p} = \frac{1}{\sqrt{2\pi}}e^{ipx}$であることを示せ.\\
+
+ここで$\Delta t$だけ時間発展させると
+\begin{eqnarray}
+  \bra{p}e^{-iH\Delta t}\ket{\psi} = \qty(\frac{\alpha}{\pi})^{\frac{1}{4}}e^{-\frac{\alpha}{2}p^2}e^{-i\frac{\hat{p}^2}{2m}\Delta t}
+\end{eqnarray}
+である. \\
+
+\fbox{問2} $i\partial_t\ket{\psi} = \hat{H}\ket{\psi}$の形式解が$e^{-i\hat{H}t}\ket{\psi}$であることを確かめよ.\\
+
+これを$x$-表示に移すと
+\begin{eqnarray}
+  \bra{x}\ket{\psi} = \qty(\frac{\alpha}{\pi})^{\frac{1}{4}}\sqrt{\frac{1}{\alpha + i\frac{\Delta t}{m}}}e^{-\frac{1}{\alpha + i\frac{\Delta t}{m}}x^2}\label{DevelopedFreeWavePacket}
+\end{eqnarray}
+となる. 自由粒子の波束の幅は時間発展と共に広がっていくことがわかる.
+\subsection{Green関数}
+以上のような「様々な初期波束を置いてみて, 時間発展に従って波動関数がどのように変化するのか」を考える問題ではGreen関数(伝搬関数, propagator)を計算しておくと便利.
+\begin{eqnarray}
+  \bra{x}\ket{\psi(t)} = \bra{x}e^{-iH(t-t_0)}\ket{\psi(t_0)} &=& \int dx'\bra{x}e^{-iH(t-t_0)}\ket{x'}\bra{x'}\ket{\psi(t_0)}\\
+  &=& \int dx' G(x, t;x', t_0)\bra{x'}\ket{\psi(t_0)}
+\end{eqnarray}
+Green関数$G(x, t;x', t_0)$は, 時刻 $t_0$ に場所 $x_0$ にいた粒子が時刻$t$ に場所 $x$ に移動している確率振幅密度のようなもの. このGreen関数が分かりさえすれば波束を掛けて積分することで時間発展を追うことができる. このGreen関数を計算する方法としてよく用いられるのが経路積分である.
+
+Green関数の数学的な定義などについては別途勉強しましょう.
+\section{経路積分の基礎}
+\subsection{経路積分の導出}
+伝搬関数は初期状態を$(q_i, t_i)$, 終状態を$(q_f, t_f)$とすると
+\begin{eqnarray}
+  K(q_f, t_f;q_i, t_i) = \bra{q_f, t_f}e^{-i\hat{H}(t_f-t_i)}\ket{q_i, t_i}
+\end{eqnarray}
+と定義できる\footnote{以降伝搬関数は$K$と書く. これをFeynman核(Feynman kernel)と呼ぶ. $t>0$を約束すればGreen関数とFeynman核は同じもの. }. $\ket{q, t}$は時刻$t$で粒子が座標$q$に局在している$\hat{q}$の固有状態である. 自由粒子などの簡単なモデルであれば伝搬関数の計算もそんなに大変ではないが, もっと複雑なモデルではそう簡単に求まらない. これをうまく計算するために経路積分(Path Integral)を導出する.
+
+まず時間を微小区間$\delta t$に分割する:
+\begin{eqnarray}
+  e^{-i\hat{H}(t_f-t_i)} = \prod_{I=1}^Ne^{-i\hat{H}\delta t},\hspace{0.5cm} \delta t = \frac{t_f - t_i}{N}
+\end{eqnarray}
+時間を$N+1$分割したことになる. $\hat{q}$が$\hat{p}$より右側にあることを仮定し, 各分割点に位置演算子$\hat{q}(t_i + I\delta t)$の固有状態$\ket{q_I}$の完全系
+\begin{eqnarray}
+  \int dq_I \ket{q_I}\bra{q_I} = 1
+\end{eqnarray}
+を挟むと伝搬関数は以下のように書き直せる:
+\begin{eqnarray}
+\nonumber  K(q_f, t_f;q_i, t_i) =\int dq_{N-1}dq_{N-2}\cdots dq_{I}\cdots dq_2dq_1\bra{q_f}e^{-i\hat{H}\delta t}\ket{q_{N-1}}\bra{q_{N-1}}e^{-i\hat{H}\delta t}\ket{q_{N-2}}\bra{q_{N-2}}\cdots\\
+  \cdots\bra{q_{I+1}}e^{-i\hat{H}\delta t}\ket{q_{I}}\cdots\bra{q_2}e^{-i\hat{H}\delta t}\ket{q_1}\bra{q_1}e^{-i\hat{H}\delta t}\ket{q_i}
+\end{eqnarray}
+以下では$\bra{q_{I+1}}e^{-i\hat{H}\delta t}\ket{q_{I}}$を計算することを考える. これに運動量演算子$\hat{p}(t_i + I\delta t)$の固有状態$\ket{p_I}$の完全系
+\begin{eqnarray}
+  \int dp_I \ket{p_I}\bra{p_I} = 1
+\end{eqnarray}
+を挿入する:
+\begin{eqnarray}
+  \bra{q_{I+1}}e^{-i\hat{H}\delta t}\ket{q_{I}} &=& \int dp_I\bra{q_{I+1}}\ket{p_I}\bra{p_I}e^{-i\hat{H}\delta t}\ket{q_{I}}\\
+  &=&\int dp_I\bra{q_{I+1}}\ket{p_I}e^{-iH(q_I, p_I)\delta t}\bra{p_I}\ket{q_{I}}
+\end{eqnarray}\\
+
+\fbox{問3} $\hat{H}$に演算子$\hat{q}, \hat{p}$が含まれていることから, $\bra{p_I}e^{-i\hat{H}\delta t}\ket{q_{I}}$のハットハミルトニアンが$c$-数の$H(q_I, p_I)$に化けることを示せ.\\
+
+$\bra{q}\ket{p}$は平面波になることから
+\begin{eqnarray}
+  \bra{q_{I+1}}e^{-i\hat{H}\delta t}\ket{q_{I}} &=& \frac{1}{2\pi}\int dp_Ie^{i\qty(p_I\frac{q_{I+1}-q_I}{\delta t}-iH(q_I, p_I)){\delta t}}
+\end{eqnarray}
+$\delta t \rightarrow 0$の極限では$\cfrac{q_{I+1}-q_I}{\delta t}\rightarrow \cfrac{dq}{dt}$であることから
+\begin{eqnarray}
+  K(q_f, t_f;q_i, t_i) &=& \int {\cal D}p{\cal D}qe^{i\int_{t_i}^{t_f}dt\qty(p\frac{dq}{dt} - H)}\\
+  {\cal D}p{\cal D}q &=& \prod_{I=0}^{N}\frac{{\cal D}p{\cal D}q}{2\pi}
+\end{eqnarray}\\
+
+\fbox{問4} expの肩が(和ではなく)積分になることを確認せよ.\\
+
+$N$はいずれ$\infty$になるので, 無限回の積分を行わなくてはいけない。この積分は $q(t_i) = q_i, q(t_f) = q_f$ となるような境界条件をつけて行うとする.
+
+$H = \frac{p^2}{2m} + V(q)$の場合について考える:
+\begin{eqnarray}
+  K(q_f, t_f;q_i, t_i) &=& \int {\cal D}p{\cal D}qe^{i\int_{t_i}^{t_f}dt\qty(p\frac{dq}{dt} - \frac{p^2}{2m} - V(q))} = \int {\cal D}p{\cal D}qe^{i\int_{t_i}^{t_f}dt\qty(-\frac{(p-m\dot{q})^2}{2m} + \frac{\dot{q}^2}{2m} - V(q))}
+\end{eqnarray}
+これで$p$について積分が可能. $q$の積分は$V(q)$の具体系が与えられて初めて計算が可能になる. $p$の積分を実行し, その解が${\cal N}$だったとすると
+\begin{eqnarray}
+  K(q_f, t_f;q_i, t_i) = {\cal N}\int {\cal D}qe^{i\int_{t_i}^{t_f}dt\qty(\frac{\dot{q}^2}{2m} - V(q))}\label{FeynmanPropagator}
+\end{eqnarray}
+$\exp$の肩に作用(action)$S[q(t)] = \int_{t_i}^{t_f}dt\qty(\frac{\dot{q}^2}{2m} - V(q))$に虚数単位を掛けて積分すれば伝搬関数が求まることがわかる. これが経路積分である.
+
+作用が(プランク定数より)十分大きい場合$\exp(iS)$は極値の近傍を除いて激しく振動して積分に効いてこないことが期待される. この極値のみを取り出してきたものを「古典極限」と呼ぶ. 作用がプランク定数と同程度のオーダーを持つ場合, 極値近傍以外にも積分に効いてくる可能性があり, これが量子効果として取り入れられることになる.\\
+
+\fbox{問5} 無次元化をしない場合, 経路積分の被積分関数は$\exp\qty(iS/\hbar)$と書ける. $S$がプランク定数$\hbar$より十分大きい時, $S$の極値以外の積分が値に効いてこない理由を考えよ. 
+
+\subsection{自由粒子 : 経路積分を使わない方法}
+自由粒子($V(q) = 0$)の場合は経路積分を使わなくても伝搬関数がすぐに求まる. まず$p$-表示で確率振幅を書き下す:
+\begin{eqnarray}
+  \bra{p_f}e^{-i\frac{\hat{p}^2}{2m}(t_f - t_i)}\ket{p_i} = e^{-i\frac{p_f^2}{2m}(t_f - t_i)}\delta(p_f - p_i)
+\end{eqnarray}
+これを$x$-表示に移す:
+\begin{eqnarray}
+ K(x_f, t_f;x_i, t_i) = \bra{x_f}e^{-i\frac{\hat{p}^2}{2m}(t_f - t_i)}\ket{x_i} &=& \int dp\bra{x_f}\ket{p}\bra{p}e^{-i\frac{\hat{p}^2}{2m}(t_f - t_i)}\ket{x_i}\\
+  &=&\sqrt{\frac{m}{2\pi i(t_f-t_i)}}e^{-i\frac{m}{2(t_f - t_i)}(x_f - x_i)^2}\label{FreePropagator}
+\end{eqnarray}\\
+\fbox{問6} (\ref{FreePropagator})(\ref{DevelopedFreeWavePacket})を用いて(\ref{FreeWavePacket})を再現せよ.
+
+\subsection{自由粒子 : 経路積分の方法}
+まずは伝搬関数(の被積分関数)を時間について離散化する($\dot{x} = \cfrac{x_{j+1} - x_j}{\delta t}$):
+\begin{eqnarray}
+e^{-i\int dt\frac{m\dot(x)^2}{2}} \rightarrow \prod_{j=0}^Ne^{\frac{im}{2}\qty(\frac{x_{j+1} - x_j}{\delta t})\delta t}
+\end{eqnarray}
+ただし$x_0 = x_i, x_{N+1} = x_f$とする. これに$\int dx_1dx_2\cdots dx_N$をかけて積分すれば(\ref{FeynmanPropagator})が計算できたことになる. ここで公式
+\begin{eqnarray}
+  \int_{-\infty}^{\infty} dx e^{ia(x-x_1)^2 + ib(x-x_2)^2} = \sqrt{\frac{i\pi}{a+b}}e^{i\frac{ab}{a+b}(x_1-x_2)^2}\label{Gauss}
+\end{eqnarray}
+を用いる. \\
+
+\fbox{問7} (\ref{Gauss})を証明せよ.\\
+
+$x_1$に関する積分:
+\begin{eqnarray}
+  \int dx_1 e^{i\frac{m}{2\delta t}\qty((x_i - x_1)^2-(x_1 - x_2)^2)} = \sqrt{\frac{i\pi\delta t}{m}}e^{-i\frac{m}{4\delta t}(x_i - x_2)^2}
+\end{eqnarray}
+これより, $x_2$の積分は:
+\begin{eqnarray}
+  \int dx_2 e^{i\frac{m}{2\delta t}\qty(\frac{1}{2}(x_i - x_2)^2-(x_2 - x_3)^2)} = \sqrt{\frac{4i\pi\delta t}{3m}}e^{-i\frac{m}{6\delta t}(x_i - x_3)^2}
+\end{eqnarray}
+これを繰り返していくと$x_n$の積分因子として$\sqrt{\cfrac{i2n\pi\delta t}{(n+1)m}}$が現れることがわかる. 全積分が終わったとき
+\begin{eqnarray}
+  K(x_f, t_f;x_i, t_i) = \bra{x_f}e^{-i\frac{\hat{p}^2}{2m}(t_f - t_i)}\ket{x_i} = {\cal N}\qty(\sqrt{\frac{i2\pi\delta t}{m}})^Ne^{i\frac{m}{2(N+1)\delta t}(x_f - x_i)^2}
+\end{eqnarray}
+${\cal N}$は$p$積分の結果出てくる因子で, 積分1回につき$\sqrt{\cfrac{m}{2\pi i}}$が出てくる. さらに$\delta t(N+1) = t_f - t_i$であることを用いると
+\begin{eqnarray}
+  K(x_f, t_f;x_i, t_i ) &=&\sqrt{\frac{m}{2\pi i(t_f-t_i)}}e^{-i\frac{m}{2(t_f - t_i)}(x_f - x_i)^2}
+\end{eqnarray}
+となり, (\ref{FreePropagator})と一致している. 
+\section{数値計算}
+自由粒子の経路積分について数値計算を行う. 
+
+\section{課題}
+まずやってほしいことは, 以上の内容について物理的な理由付けをして理解することです. とりあえず数値計算してなんか出てきました, ってのはナシにしてください. それができたら今までの知識を用いて好きなことをやってください. 自由研究です.
+
+とはいえ丸投げも厳しいと思うのでいくつかのテーマを挙げます. \\
+
+\begin{itemize}
+\item 調和トラップ系の経路積分を数値計算で
+\item 調和トラップ系の経路積分を解析計算で(やや難？)
+\item WKB近似で経路積分を再定式化(去年邢くんがやった)
+\item Feynman Diagramのお勉強(やや難？)
+\item Green関数のお勉強
+\end{itemize}
+
+\end{document}
+
