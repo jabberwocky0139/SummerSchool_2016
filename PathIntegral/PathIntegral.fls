@@ -168,6 +168,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
 OUTPUT PathIntegral.dvi
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ptex/standard/tmin10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ptex/standard/tmin10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti8.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 INPUT PathIntegral.aux

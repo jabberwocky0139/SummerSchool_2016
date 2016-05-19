@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2015/dev/Debian) (preloaded format=platex 2016.4.27)  4 MAY 2016 22:03
+This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2015/dev/Debian) (preloaded format=platex 2016.4.27)  10 MAY 2016 12:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1356,27 +1356,33 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 120.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 5.76599pt on input line 120.
- [3] [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 226.
+ [3] [4] [5] [6]
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <8> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 276.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 276.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <8> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 276.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 276.
+ [7]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 308.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 226.
-Missing character: There is no ^^e9 in font cmr10!
-Missing character: There is no ^^82 in font cmr10!
-Missing character: There is no ^^a2 in font cmr10!
- [5]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 308.
+ [8]
 (./PathIntegral.aux) ) 
 Here is how much of TeX's memory you used:
- 8850 strings out of 493799
- 156774 string characters out of 6153292
- 213545 words of memory out of 5000000
- 12234 multiletter control sequences out of 15000+600000
- 24851 words of font info for 109 fonts, out of 8000000 for 9000
+ 8859 strings out of 493799
+ 156866 string characters out of 6153292
+ 213600 words of memory out of 5000000
+ 12242 multiletter control sequences out of 15000+600000
+ 25203 words of font info for 110 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  40i,11n,39p,10405b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on PathIntegral.dvi (5 pages, 29772 bytes).
+Output written on PathIntegral.dvi (8 pages, 44644 bytes).

@@ -1,9 +1,9 @@
 # Fdb version 3
-["dvipdf"] 1462367037 "PathIntegral.dvi" "PathIntegral.pdf" "PathIntegral" 1462367038
-  "PathIntegral.dvi" 1462367037 29772 ea564403d3c35caea322ee2ce7800d4e "latex"
+["dvipdf"] 1462852109 "PathIntegral.dvi" "PathIntegral.pdf" "PathIntegral" 1463116836
+  "PathIntegral.dvi" 1462852109 44644 ec1bfa8dcea091b4fbd8d16e68078ea4 "latex"
   (generated)
   "PathIntegral.pdf"
-["latex"] 1462367037 "PathIntegral.tex" "PathIntegral.dvi" "PathIntegral" 1462367038
+["latex"] 1462852108 "PathIntegral.tex" "PathIntegral.dvi" "PathIntegral" 1463116836
   "/etc/texmf/web2c/texmf.cnf" 1461727744 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/ptex/ascgrp/ascgrp.tfm" 1274206740 448 9a1f3a95c3a7e2681aa6eefcf410b7ac ""
@@ -48,6 +48,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti8.tfm" 1136768653 1504 1747189e0441d1c18f3ea56fafc1c480 ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty" 1303254447 7140 ece2cc23d9f20e1f53975ac167f42d3e ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty" 1335995445 6797 68c89f65e01894df882dd523d3fc0a8f ""
@@ -90,11 +91,11 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1424169028 31088 8e088e958dd0258cc5414842768a3a00 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1424169028 31088 8e088e958dd0258cc5414842768a3a00 ""
   "/var/lib/texmf/web2c/eptex/platex.fmt" 1461727804 3995848 e9752e30cc12ed09ea89f8a21af70154 ""
-  "PathIntegral.aux" 1462367037 1039 f1678502aec6d999cdc118fe2be13430 ""
-  "PathIntegral.tex" 1462367036 13951 a073dc4e3f59302097e6ac06bcd742c0 ""
-  "PathIntegral.toc" 1462367037 665 63df62b456bf6ab4a95ae0772b37dc2b ""
+  "PathIntegral.aux" 1462852109 1761 390f9d9f34108bc2d8cc9fa4acfe0c83 ""
+  "PathIntegral.tex" 1463116829 21831 50893298852e63c6e20bf2e16d89e9fa ""
+  "PathIntegral.toc" 1462852109 1127 ad29253ad044b23f8e5749bf06ea4243 ""
   (generated)
-  "PathIntegral.aux"
-  "PathIntegral.toc"
   "PathIntegral.log"
+  "PathIntegral.toc"
+  "PathIntegral.aux"
   "PathIntegral.dvi"
