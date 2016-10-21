@@ -49,6 +49,7 @@ variable::variable(){
 }
 
 variable::~variable(){
+  
   for(int i = 0; i < m; i++){
     delete[] f[i];
     delete[] f_f[i];
@@ -59,7 +60,7 @@ variable::~variable(){
   delete[] f_b;
 }
 
-void TimeEvolution(variable& v){  
+void TimeEvolution(variable& v){
   // 時間発展の結果をf_fに代入
   for(int i = 2; i < l-2; i++){
     for(int j = 2; j < m-2; j++){

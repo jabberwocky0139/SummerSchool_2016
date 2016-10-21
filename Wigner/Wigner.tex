@@ -11,7 +11,7 @@
 \usepackage{bigints}
 \usepackage{cite}
 \usepackage{physics}
-\usepackage{wick}
+%\usepackage{wick}
 \usepackage{geometry}
 \geometry{left=20mm,right=20mm,top=25mm,bottom=25mm}
 
@@ -66,7 +66,7 @@ Wigner関数の定義は以下の通り:
 \begin{eqnarray}
   f_W(q, p, t) = \int_{-\infty}^{\infty} d\overline{q}_{12} \bra{q_1}\ket{\psi(t)}\bra{\psi(t)}\ket{q_2}e^{-ip\overline{q}_{12}/\hbar}\label{wigner2}
 \end{eqnarray}
-とすることもできる. ここでは$q_{12} = (q_1 + q_2)/2$, $\overline{q}_{12} = q_1 - q_2$である.
+とすることもできる. ここでは$q_{12} = (q_1 + q_2)/2$, $\overline{q}_{12} = q_1 - q_2$である. 重心座標と相対座標に分ける変数変換は便利なのでよく使われる. 
 \begin{comment}
   以下では(\ref{wigner})の流儀を採用することにする.
 \end{comment}
@@ -168,11 +168,11 @@ $e^{\frac{i\hbar}{2}\qty(\overleftarrow{\partial}_q\overrightarrow{\partial}_{p}
 のような偏微分方程式が導出される. これを数値的に解きたい.
 \subsection{数値計算}
 \subsubsection{差分化}
-今回は簡単のため, 普通に差分化する. 差分化した方程式はMoyal方程式は
+今回は簡単のため, 普通に差分化する. 差分化したMoyal方程式は
 \begin{eqnarray}
   f(t_{n+1}) = k_1\qty[q_lf(p_{m+1}) - p_mf(q_{l+1})] + \qty[k_1(-q_l + p_m) + 1]f
 \end{eqnarray}
-となる. ここでいくつかの記号の省略ルールを示す:
+となる. 省略ルールは以下の通り:
 \begin{itemize}
 \item Wigner表示の添字$W$は省略
 \item $f(q_l, p_m, t_n)$のように差分化しており, $q, p$の幅は$h_{qp}$, $t$の幅は$h_t$.
@@ -225,7 +225,7 @@ Wigner分布関数は位相空間上の確率分布と見なすことができ�
 \subsection{Wigner-Moyal方程式の導出}
 \fbox{補題1} 離散基底の直交性
 \begin{eqnarray}
-  \sum_j \bra{q_i}\ket{q_j} = \delta_{ij}
+  \bra{q_i}\ket{q_j} = \delta_{ij}
 \end{eqnarray}
 を連続に拡張せよ.\\
 

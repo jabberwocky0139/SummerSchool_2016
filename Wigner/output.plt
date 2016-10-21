@@ -20,7 +20,7 @@ set size square
 
 do for[i=0:99]{
 	set title sprintf("phase space on wigner : time = %d", i)
-	plot "output_false.txt" every :::i::i using 1:2:3 with image notitle
+	plot "output.txt" every :::i::i using 1:2:3 with image notitle
 	pause 0.01
 }
 

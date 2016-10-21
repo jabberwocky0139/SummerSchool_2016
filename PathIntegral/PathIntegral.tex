@@ -11,7 +11,7 @@
 \usepackage{bigints}
 \usepackage{cite}
 \usepackage{physics}
-\usepackage{wick}
+%\usepackage{wick}
 \usepackage{geometry}
 \geometry{left=20mm,right=20mm,top=25mm,bottom=25mm}
 
@@ -242,7 +242,7 @@ ${\cal N}$は$p$積分の結果出てくる因子で, 積分1回につき$\sqrt{
 これにより作用がラグランジアンの積分からハミルトニアンの積分に書き換えられる:
 \begin{eqnarray}
   S[x(t)] &=& \int_{t_0=0}^{t}dtL(x, t) = i\int_{\tau_0=0}^{\tau}d\tau H(x,\tau)\label{prob10_1}\\
-  G(x, -i\tau; x_0, 0) &=& \qty(\frac{1}{2\pi})^{N+1}\int dx_1 dx_2\cdots dx_N e^{-\int_0^{\tau} H(\tau)}\label{prob10_2}
+  G(x, -i\tau; x_0, 0) &=& \qty(\frac{1}{2\pi})^{N+1}\int dx_1 dx_2\cdots dx_N e^{-\int_0^{\tau}d\tau H(\tau)}\label{prob10_2}
 \end{eqnarray}\\
 
 \fbox{問10} (\ref{prob10_1})(\ref{prob10_2})を確かめよ. \\
@@ -250,7 +250,7 @@ ${\cal N}$は$p$積分の結果出てくる因子で, 積分1回につき$\sqrt{
 \subsection{作用積分の簡略化}
 前述のハミルトニアンの積分を差分化で書き直し, 数値計算に持ち込めるようにする:
 \begin{eqnarray}
-  \int H(\tau) &\simeq& \sum_j\epsilon E_j = \epsilon W(\{x_j\})\\
+  \int d\tau H(\tau) &\simeq& \sum_j\epsilon E_j = \epsilon W(\{x_j\})\\
   W(\{x_j\}) &\equiv& \sum_j\qty[\frac{m}{2}\qty(\frac{x_{j} - x_{j-1}}{\epsilon})^2 + V\qty(\frac{x_{j} + x_{j-1}}{2})]
 \end{eqnarray}
 規格化を考慮したうえで(\ref{GroundGreen})に代入する:
@@ -273,7 +273,7 @@ $|\psi_0(x)|^2$を求めたい訳だが, 数値計算の上では離散化する
 \end{eqnarray}
 における$W(x[1], x_1, x_2, ...)$と$W(x[2], x_1, x_2, ...)$は始点(終点)が異なるので, それぞれ別々に計算を実行しなければならない. これが計算コストの肥大化の原因である.
 \subsection{処方箋}
-この問題に関する処方箋はRubinの本\footnote{Rubin H. Landau, {\it Computational Physics} (1997) pp. 313-317}にあるのでこれを参考勉強するのがいいと思います. が, 翻訳があまり良くないのかそもそも原文の内容が丁寧でないためか, 理解するのはなかなか難しいと思います. 理解のための重要なポイントは
+この問題に関する処方箋はRubinの本\footnote{Rubin H. Landau, {\it Computational Physics} 翻訳版 (1997) pp. 313-317}にあるのでこれを参考勉強するのがいいと思います. が, 翻訳があまり良くないのかそもそも原文の内容が丁寧でないためか, 理解するのはなかなか難しいと思います. 理解のための重要なポイントは
 \begin{itemize}
 \item[1.] $x_0$が始点(終点)の経路における$x_i$を$x'_i$にフリップしたときに$x_0$からの作用積分が $x_i$からの作用積分と同じ値であることを利用して$|\psi(x'_i)|^2$を求めることが経路積分の計算と等価であること
 \item[2.] 作用を計算して確率分布に計上することと, フリップする確率をBoltzmann分布で与えてその経路(格子点)に乗った粒子をそのまま足し上げることがだいたい等価であること
